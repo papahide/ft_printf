@@ -1,0 +1,217 @@
+✔ Executing: make fclean all (no bonus)
+ℹ Running tests: printfTester (https://github.com/Tripouille/printfTester)
+[Mandatory]
+category: c
+1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9.OK 
+category: s
+1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9.OK ==3766028== Invalid read of size 1
+==3766028==    at 0x407943: ft_putstr (in /home/paapahid/francinette/temp/printf/printfTester/s_test)
+==3766028==    by 0x407559: ft_format (in /home/paapahid/francinette/temp/printf/printfTester/s_test)
+==3766028==    by 0x40741E: ft_printf (in /home/paapahid/francinette/temp/printf/printfTester/s_test)
+==3766028==    by 0x406F17: void print<long>(char const*, long) (print.hpp:66)
+==3766028==    by 0x4052A0: main (s_test.cpp:37)
+==3766028==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==3766028== 
+10.SIGSEGV 
+category: p
+1.KO 2.OK 3.OK 4.KO 5.KO 6.TIMEOUT 7.KO 8.KO 9.KO 
+category: d
+1.OK 2.OK 3.OK 4.OK 5.KO 6.KO 7.KO 8.KO 9.KO 10.KO 11.KO 12.KO 13.OK 14.KO 15.KO 16.KO 17.KO 18.KO 19.KO 20.KO 21.KO 22.KO 23.KO 24.OK 25.OK 26.OK 27.OK 28.OK 29.KO 
+category: i
+1.OK 2.OK 3.OK 4.OK 5.KO 6.KO 7.KO 8.KO 9.KO 10.KO 11.KO 12.KO 13.OK 14.KO 15.KO 16.KO 17.KO 18.KO 19.KO 20.KO 21.KO 22.KO 23.KO 24.OK 25.OK 26.OK 27.OK 28.OK 29.KO 
+category: u
+1.OK 2.KO 3.OK 4.OK 5.KO 6.KO 7.KO 8.KO 9.KO 10.KO 11.KO 12.KO 13.KO 14.KO 15.KO 16.KO 17.KO 18.KO 19.KO 20.KO 21.KO 22.KO 23.KO 24.KO 25.OK 26.KO 27.KO 28.KO 29.KO 
+category: x
+1.OK 2.KO 3.OK 4.OK 5.OK 6.OK 7.OK 8.KO 9.KO 10.KO 11.KO 12.KO 13.KO 14.KO 15.KO 16.KO 17.KO 18.KO 19.KO 20.KO 21.KO 22.KO 23.KO 24.KO 25.OK 26.KO 27.KO 28.KO 29.KO 30.KO 31.KO 
+category: X
+1.OK 2.KO 3.OK 4.OK 5.KO 6.KO 7.KO 8.KO 9.KO 10.KO 11.KO 12.KO 13.KO 14.KO 15.KO 16.KO 17.KO 18.KO 19.KO 20.KO 21.KO 22.KO 23.KO 24.KO 25.OK 26.KO 27.KO 28.KO 29.KO 30.KO 31.KO 
+category: %
+1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 
+category: mix
+1.KO 
+
+Errors found:
+For /home/paapahid/francinette/tests/printf/printfTester/tests/s_test.cpp:
+36:     TEST(10, print(" NULL %s NULL ", NULL));
+
+For /home/paapahid/francinette/tests/printf/printfTester/tests/p_test.cpp:
+25:     TEST(1, print(" %p ", -1));
+28:     TEST(4, print(" %p ", 16));
+29:     TEST(5, print(" %p ", 17));
+30:     TEST(6, print(" %p %p ", LONG_MIN, LONG_MAX));
+31:     TEST(7, print(" %p %p ", INT_MIN, INT_MAX));
+32:     TEST(8, print(" %p %p ", ULONG_MAX, -ULONG_MAX));
+33:     TEST(9, print(" %p %p ", 0, 0));
+
+For /home/paapahid/francinette/tests/printf/printfTester/tests/d_test.cpp:
+29:     TEST(5, print(" %d ", 10));
+30:     TEST(6, print(" %d ", 11));
+31:     TEST(7, print(" %d ", 15));
+32:     TEST(8, print(" %d ", 16));
+33:     TEST(9, print(" %d ", 17));
+34:     TEST(10, print(" %d ", 99));
+35:     TEST(11, print(" %d ", 100));
+...
+
+File too large. To see full report open: /home/paapahid/francinette/temp/printf/printfTester/errors.log
+
+✖ Compiling tests: fsoares (my own tests)
+clang: error: no such file or directory: '../__my_srcs/libftprintf.a'
+make: [Makefile:19: build_m] Error 1 (ignored)
+Problem compiling the tests
+
+Summary: no bonus
+
+Norminette Errors: ft_printf.c, ft_printf_tools.c
+
+Failed tests: printfTester, fsoares
+c2r2s1% make
+cc -Wall -Wextra -Werror -c ft_printf.c -o ft_printf.o
+cc -Wall -Wextra -Werror -c ft_printf_tools.c -o ft_printf_tools.o
+ar rcs libftprintf.a ft_printf.o ft_printf_tools.o ft_printf.h
+
+---------------------------------------------------------------------------------------------
+
+c2r2s1% cat /home/paapahid/francinette/tests/printf/printfTester/tests/s_test.cpp
+extern "C"
+{
+#define new tripouille
+#include "ft_printf.h"
+#undef new
+}
+
+#include "sigsegv.hpp"
+#include "check.hpp"
+#include "print.hpp"
+
+# define TEST_LIMIT 10
+
+int iTest = 1;
+int testNumber;
+char * testName;
+bool showTest = false;
+int main(int ac, char ** av)
+{
+	char *s2 = "Mussum Ipsum, cacilds vidis litro abertis. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Atirei o pau no gatis, per gatis num morreus.";
+	handle_signals();
+	cout << FG_LYELLOW << "category: s" << RESET_ALL;
+
+	testName = av[0];
+	if (ac != 1)
+		printTestNumber(av[1], TEST_LIMIT);
+	cout << endl;
+	TEST(1, print("%s", ""));
+	TEST(2, print(" %s", ""));
+	TEST(3, print("%s ", ""));
+	TEST(4, print(" %s ", ""));
+	TEST(5, print(" %s ", "-"));
+	TEST(6, print(" %s %s ", "", "-"));
+	TEST(7, print(" %s %s ", " - ", ""));
+	TEST(8, print(" %s %s %s %s %s", " - ", "", "4", "", s2));
+	TEST(9, print(" %s %s %s %s %s ", " - ", "", "4", "", "2 "));
+	TEST(10, print(" NULL %s NULL ", NULL));
+	cout << ENDL;
+	return (0);
+}
+
+---------------------------------------------------------------------------------------------
+
+c2r2s1% cat /home/paapahid/francinette/tests/printf/printfTester/tests/p_test.cpp
+extern "C"
+{
+#define new tripouille
+#include "ft_printf.h"
+#undef new
+}
+
+#include "sigsegv.hpp"
+#include "check.hpp"
+#include "print.hpp"
+#define TEST_LIMIT 9
+
+int iTest = 1;
+int testNumber;
+char * testName;
+bool showTest = false;
+int main(int ac, char ** av)
+{
+	handle_signals();
+	cout << FG_LYELLOW << "category: p" << RESET_ALL;
+
+	testName = av[0];
+	if (ac != 1)
+		printTestNumber(av[1], TEST_LIMIT);
+	cout << endl;
+	TEST(1, print(" %p ", -1));
+	TEST(2, print(" %p ", 1));
+	TEST(3, print(" %p ", 15));
+	TEST(4, print(" %p ", 16));
+	TEST(5, print(" %p ", 17));
+	TEST(6, print(" %p %p ", LONG_MIN, LONG_MAX));
+	TEST(7, print(" %p %p ", INT_MIN, INT_MAX));
+	TEST(8, print(" %p %p ", ULONG_MAX, -ULONG_MAX));
+	TEST(9, print(" %p %p ", 0, 0));
+	cout << ENDL;
+	return (0);
+}%       
+
+---------------------------------------------------------------------------------------------
+
+c2r2s1% cat /home/paapahid/francinette/tests/printf/printfTester/tests/d_test.cpp
+extern "C"
+{
+#define new tripouille
+#include "ft_printf.h"
+#undef new
+}
+
+#include "sigsegv.hpp"
+#include "check.hpp"
+#include "print.hpp"
+#define TEST_LIMIT 29
+
+int iTest = 1;
+int testNumber;
+char * testName;
+bool showTest = false;
+int main(int ac, char ** av)
+{
+	handle_signals();
+	cout << FG_LYELLOW << "category: d" << RESET_ALL;
+
+	testName = av[0];
+	if (ac != 1)
+		printTestNumber(av[1], TEST_LIMIT);
+	cout << endl;
+	TEST(1, print(" %d ", 0));
+	TEST(2, print(" %d ", -1));
+	TEST(3, print(" %d ", 1));
+	TEST(4, print(" %d ", 9));
+	TEST(5, print(" %d ", 10));
+	TEST(6, print(" %d ", 11));
+	TEST(7, print(" %d ", 15));
+	TEST(8, print(" %d ", 16));
+	TEST(9, print(" %d ", 17));
+	TEST(10, print(" %d ", 99));
+	TEST(11, print(" %d ", 100));
+	TEST(12, print(" %d ", 101));
+	TEST(13, print(" %d ", -9));
+	TEST(14, print(" %d ", -10));
+	TEST(15, print(" %d ", -11));
+	TEST(16, print(" %d ", -14));
+	TEST(17, print(" %d ", -15));
+	TEST(18, print(" %d ", -16));
+	TEST(19, print(" %d ", -99));
+	TEST(20, print(" %d ", -100));
+	TEST(21, print(" %d ", -101));
+	TEST(22, print(" %d ", INT_MAX));
+	TEST(23, print(" %d ", INT_MIN));
+	TEST(24, print(" %d ", LONG_MAX));
+	TEST(25, print(" %d ", LONG_MIN));
+	TEST(26, print(" %d ", UINT_MAX));
+	TEST(27, print(" %d ", ULONG_MAX));
+	TEST(28, print(" %d ", 9223372036854775807LL));
+	TEST(29, print(" %d %d %d %d %d %d %d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
+	cout << ENDL;
+	return (0);
+}%          
