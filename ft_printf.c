@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paapahid <paapahid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paapahid <paapahid@student.42madrid.c>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:10:01 by paapahid          #+#    #+#             */
-/*   Updated: 2025/12/03 16:48:32 by paapahid         ###   ########.fr       */
+/*   Updated: 2025/12/03 21:56:52 by paapahid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static int	ft_format(unsigned char spec, va_list ap)
 {
@@ -19,7 +20,7 @@ static int	ft_format(unsigned char spec, va_list ap)
 	size = 0;
 	if(spec == 'c')
 		size += ft_printc(va_arg(ap, int));
-	else if(spec == 's')
+	if(spec == 's')
 		size += ft_putstr(va_arg(ap, char *));
 	else if(spec == 'p')
 	{
@@ -33,7 +34,7 @@ static int	ft_format(unsigned char spec, va_list ap)
 	else if(spec == 'x')
 		size += ft_putnbr_base(((long)va_arg(ap, unsigned int)), 16);
 	else if(spec == 'X')
-		size += ft_toupper(ft_putnbr_base(((long)va_arg(ap, unsigned int)), 16));
+		size += ft_putnbr_base(((long)va_arg(ap, unsigned int)), 16);
 	else if(spec == '%' && (spec + 1) == '%')
 		size += write(1, "%%", 1);
 	else
@@ -64,42 +65,30 @@ int	ft_printf(const char *form, ...)
 	return(size);
 }
 
-// int main(void)
-// {
-//     char    c = 'A';
-//     char    *s = "Hola, mundo";
-//     void    *p = s;
-//     int     d = -42;
-//     int     i = 1337;
-//     unsigned int u = 424242;
-//     unsigned int x = 0xabcdef;
-//     unsigned int X = 0x123456;
+#include <stdio.h>
+#include <stdlib.h>
+int main(void)
+{
+    // char    c = 'A';
+    // char    *s = "Hola, mundo";
+    // void    *p = s;
+    // int     d = -1;
+    // int     i = 1337;
+    // unsigned int u = 424242;
+    // unsigned int x = 0xabcdef;
+    // unsigned int X = 0x123456;
+	int		counter;
 
-//     /* MI PRINTF */
-//     ft_printf("MI PRINTF:\n");
+    /* MI PRINTF */
+	ft_printf("MI PRINTF:\n");
+    counter = ft_printf("%c\n", '0');
+	ft_printf("COUNTER: %d \n", counter);
 
-//     ft_printf("%%c: %c\n", c);
-//     ft_printf("%%s: %s\n", s);
-//     ft_printf("%%p: %p\n", p);
-//     ft_printf("%%d: %d\n", d);
-//     ft_printf("%%i: %i\n", i);
-//     ft_printf("%%u: %u\n", u);
-//     ft_printf("%%x: %x\n", x);
-//     ft_printf("%%X: %X\n", X);
-//     ft_printf("%%%%: %%\n");
+	/* PRINTF ORIGINAL */
+	printf("------------------------------------------------\n");
+	printf("\nPRINTF ORIGINAL:\n");
+	counter = printf("%c\n", '0');
+	printf("COUNTER: %d \n", counter);
 
-//     ft_printf("\nPRINTF ORIGINAL:\n");
-
-//     /* PRINTF ORIGINAL */
-//     printf("%%c: %c\n", c);
-//     printf("%%s: %s\n", s);
-//     printf("%%p: %p\n", p);
-//     printf("%%d: %d\n", d);
-//     printf("%%i: %i\n", i);
-//     printf("%%u: %u\n", u);
-//     printf("%%x: %x\n", x);
-//     printf("%%X: %X\n", X);
-//     printf("%%%%: %%\n");
-
-//     return 0;
-// }
+    return 0;
+}

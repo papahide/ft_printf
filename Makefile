@@ -12,21 +12,23 @@
 
 NAME = libftprintf.a
 
-CC = cc
-
-CFLAGS = -Wall -Wextra -Werror
+LIB = ar rcs
 
 SRC = ft_printf.c ft_printf_tools.c ft_printf.h
 
 OBJ = $(SRC:.c=.o)
 
-ALL = $(NAME)
+CC = cc
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+CFLAGS = -Wall -Wextra -Werror
+
+all = $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ)
+	$(LIB) $(NAME) $(OBJ)
 
 clean:
 	rm -rf $(OBJ)
@@ -35,3 +37,5 @@ fclean:
 	rm -rf $(NAME)
 
 re: flean all
+
+.PHONY: all clean fclean
